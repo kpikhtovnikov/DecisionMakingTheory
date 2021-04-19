@@ -6,11 +6,11 @@ iteration = 0
 start_k = 178
 # Призводительность цеха 1
 def f1(x):
-    return np.log(x)+10 
+    return 6+np.log(x)+8
 
 # Призводительность цеха 2
 def f2(x):
-    return 6+np.log(x)+8
+    return np.log(x)+10 
 
 # Общая производительность за месяц
 def w(k, x):
@@ -18,18 +18,12 @@ def w(k, x):
 
 # Остаток производства за месяц
 def phi(k,x):
-    return (0.87 *x + 0.65*(k-x))
+    return (0.65 *x + 0.87*(k-x))
 
 # Вычисление условного оптимального выигрыша при заданном остатке k
 def  W(k,ks,Ws):
     xs =  np.arange(k+1)
     next_k = phi(k,xs)
-    #print("sorted",len(np.searchsorted(ks,next_k)))
-    #print("Ws",len(Ws))
-    #print("Ws_sorted",Ws[np.searchsorted(ks,next_k)])
-    #print("Yes",Ws)
-    #print("Yes",ks)
-    #print("Yes",next_k)
     vals = w(k,xs) + Ws[np.searchsorted(ks,next_k)]
     besti = np.argmax(vals)
     return (vals[besti],xs[besti])
@@ -42,10 +36,10 @@ def Wx(k, xs, ks, Ws):
 
 #Для  3-го месяца
 print("3 месяц")
-k_4 = np.linspace(0.87**3*178,0.65**3*178,10)
+k_4 = np.linspace(0.65**3*178,0.87**3*178,10)
 W_4 = np.zeros(len(k_4)+1)
-k3_min = 0.87**2*178
-k3_max = 0.65**2*178
+k3_min = 0.65**2*178
+k3_max = 0.87**2*178
 k_3 = np.linspace(k3_min,k3_max,10)
 #W_3 = np.zeros(len(k_4)+1)
 W_3 = np.zeros(len(k_4))
@@ -74,8 +68,8 @@ plt.show()
 
 #Для  2-го месяца
 print("2 месяц")
-k2_min = 0.87**1*178
-k2_max = 0.65**1*178
+k2_min = 0.65**1*178
+k2_max = 0.87**1*178
 k_2 = np.linspace(k2_min,k2_max,10)
 #W_2 = np.zeros(len(k_2)+1)
 W_2 = np.zeros(len(k_2))
@@ -107,7 +101,7 @@ plt.show()
 #Для  1-го месяца
 k1_max = 178
 x1_max = np.arange(k1_max)
-k_1 = np.linspace(0.87**0*178,0.65**0*178,10)
+k_1 = np.linspace(0.65**0*178,0.87**0*178,10)
 W_1 = np.zeros(len(k_1)+1)
 x_1 = W_1
 for i in range(len(k_1)):

@@ -26,7 +26,7 @@ print('Objective :', solution['primal objective'])
 print('x = \n', solution['x'])
 
 print(solution['z'])
-dh = matrix([0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);     # приращение к вектору правых частей
+dh = matrix([0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);     # приращение к вектору правых частей
 solution1 = solvers.lp(c, G.T, h + dh, solver='glpk')
 print('Status:', solution1['status'])
 print('Objective:', -solution1['primal objective'], 'delta:', -solution1['primal objective']-(-solution['primal objective']))
